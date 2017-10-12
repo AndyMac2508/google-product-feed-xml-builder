@@ -2,7 +2,7 @@
 namespace RapidWeb\GoogleProductFeedXml\Objects;
 
 use DOMDocument;
-use Rapidweb\GoogleProductFeedXml\Objects\BaseProduct;
+use RapidWeb\GoogleProductFeedXml\Objects\BaseProduct;
 
 abstract class GoogleProductFeed
 {
@@ -15,7 +15,10 @@ abstract class GoogleProductFeed
 
  public function getXml()
  {
-    //validation
+   
+    if($errors = SELF::validate(SELF::$products)){
+        return $errors;
+    }
 
 
     $domdoc = new DOMDocument('1.0');
@@ -27,7 +30,13 @@ abstract class GoogleProductFeed
 
     foreach(SELF::$products as $product){
       $envelope->appendChild($product->createXmlelement($domdoc));
+      if(count($product->variations) > 0){
+          foreach($product->variations as $variation){
+            $envelope->appendChild($variation->createXmlelement($domdoc));
+          }
+      }
     }
+ 
 
     var_dump($domdoc->saveXML()); die;
 
@@ -54,8 +63,24 @@ public function Products()
      $channel->appendChild($link);
      $channel->appendChild($description);
 
-     return $envelope;
+     return $channel;
 
+}
+private function validate($items)
+{
+    //validation
+   $i = 0;
+
+   $productCount = count($items);
+    foreach($items as $item){
+       $errors = $item->validate;
+    }
+
+    if(count($errors) > 0 )
+    {
+        return $errors;
+    }
+    return false;
 }
 
 }

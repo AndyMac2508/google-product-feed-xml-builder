@@ -9,12 +9,12 @@ class ComposerStaticInite2aebce177bc31f105105a61e294703c
     public static $prefixLengthsPsr4 = array (
         'R' => 
         array (
-            'Rapidweb\\GoogleProductFeedXml\\' => 30,
+            'RapidWeb\\GoogleProductFeedXml\\' => 30,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Rapidweb\\GoogleProductFeedXml\\' => 
+        'RapidWeb\\GoogleProductFeedXml\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

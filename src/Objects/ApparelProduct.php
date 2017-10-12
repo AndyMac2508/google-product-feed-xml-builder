@@ -1,9 +1,10 @@
 <?
 namespace RapidWeb\GoogleProductFeedXml\Objects;
 
-use Rapidweb\GoogleProductFeedXml\Objects\BaseProduct;
+use RapidWeb\GoogleProductFeedXml\Objects\BaseProduct;
+use RapidWeb\GoogleProductFeedXml\Interfaces\ProductInterface;
 
-class ApparelProduct extends BaseProduct
+class ApparelProduct extends BaseProduct implements ProductInterface
 {
     public $googleProductCategory;
     public $brand;
@@ -11,6 +12,8 @@ class ApparelProduct extends BaseProduct
     public $ageGroup;
     public $color;
     public $size;
+  
+
 
     public function createXmlelement($domdoc)
     {
@@ -33,6 +36,41 @@ class ApparelProduct extends BaseProduct
         return $baseProduct;
 
     }
+
+    public function validate()
+    {
+      
+      $errors = parent::validate();
+      if(!isset($this->googleProductCategory))
+      {
+      $errors[] = "missing a category";
+      }
+      if(!isset($this->brand))
+      {
+          $errors[] = "missing a brand";
+      }
+      if(!isset($this->gender))
+      {
+          $errors[] = "missing a gender";
+      }
+      if(!isset($this->ageGroup))
+      {
+          $errors[] = "missing a ageGroup";
+      }
+      if(!isset($this->color))
+      {
+          $errors[] = "is missing a color";
+      }
+      if(!isset($this->size))
+      {
+          $errors[] = "is missing a size";
+      }
+
+      return $errors;
+      
+    }
+
+
 }
 
 
