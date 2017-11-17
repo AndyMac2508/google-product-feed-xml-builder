@@ -1,5 +1,5 @@
 {
-"name": "andymac2508/GoogleProductFeedXmlBuilder",
+"name": "andymac2508/google-product-feed-xml-builder",
         "type": "library",
         "description": "A package to create a simple google products xml feed",
         "keywords": ["google product feed", "PHP", "PHP library"],
