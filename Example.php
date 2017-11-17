@@ -8,6 +8,7 @@ use RapidWeb\GoogleProductFeedXml\Objects\Variation;
 
 $product = new ApparelProduct;
 $productVariation = new ApparelProduct;
+$productVariation2 = new ApparelProduct;
 
 
 $product->sku = "sku123";
@@ -43,7 +44,24 @@ $productVariation->ageGroup = "variationage";
 $productVariation->color = "variationcol";
 $productVariation->size = "variationsize";
 
+$productVariation2->sku = "variation2";
+$productVariation2->description = "variationdesc2";
+$productVariation2->url =  "variationurl2";
+$productVariation2->image = "variationimage2";
+$productVariation2->condition =  "variationcondition2";
+$productVariation2->availability = "variationconditionstock2";
+$productVariation2->price = "13332222";
+
+$productVariation2->googleProductCategory = "variationcat2";
+$productVariation2->brand = "variationbrand2";
+$productVariation2->gender = "variationgender2";
+$productVariation2->ageGroup = "variationage2";
+$productVariation2->color = "variationcol2";
+$productVariation2->size = "variationsize2";
+
+
 $product->addVariation($productVariation);
+$product->addVariation($productVariation2);
 
 
 

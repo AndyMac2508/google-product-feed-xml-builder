@@ -1,0 +1,14 @@
+{
+"name": "GoogleProductFeedXmlBuilder",
+        "type": "library",
+        "description": "A package to create a simpel google products xml feed",
+        "keywords": ["google product feed", "PHP", "PHP library"],
+        "homepage": "https://github.com/rapidwebltd/php-postcodes",
+        "license": "LGPL3",
+    "autoload": {
+        "psr-4": {
+            "RapidWeb\\GoogleProductFeedXml\\": "src/"
+        }
+    }
+
+}
