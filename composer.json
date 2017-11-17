@@ -1,7 +1,7 @@
 {
-"name": "GoogleProductFeedXmlBuilder",
+"name": "andymac2508/GoogleProductFeedXmlBuilder",
         "type": "library",
-        "description": "A package to create a simpel google products xml feed",
+        "description": "A package to create a simple google products xml feed",
         "keywords": ["google product feed", "PHP", "PHP library"],
         "homepage": "https://github.com/rapidwebltd/php-postcodes",
         "license": "LGPL3",
