@@ -4,19 +4,22 @@ namespace RapidWeb\GoogleProductFeedXml\Objects;
 use DOMDocument;
 use RapidWeb\GoogleProductFeedXml\Objects\BaseProduct;
 
-abstract class GoogleProductFeed
+class GoogleProductFeed
 {
- private static $products = [];
+ private  $products = [];
+ private $storeName;
+ private $description;
+ private $link;
 
  public function addProduct(BaseProduct $product)
  {
-    SELF::$products[] = $product;
+    $this->products[] = $product;
  }
 
  public function getXml()
  {
    
-    if($errors = SELF::validate(SELF::$products)){
+    if($errors = $this->validate($this->products)){
         return $errors;
     }
 
@@ -26,9 +29,9 @@ abstract class GoogleProductFeed
     $domdoc->preserveWhiteSpace = false;
     $domdoc->formatOutput = true;
 
-    $envelope = $domdoc->appendChild(SELF::feedEnvelope($domdoc));
+    $envelope = $domdoc->appendChild($this->feedEnvelope($domdoc));
 
-    foreach(SELF::$products as $product){
+    foreach($this->products as $product){
       $envelope->appendChild($product->createXmlelement($domdoc));
       if(count($product->variations) > 0){
           foreach($product->variations as $variation){
@@ -46,7 +49,7 @@ abstract class GoogleProductFeed
 
 public function Products()
  {
-     return SELF::$products;
+     return $this->products;
  }
  private function feedEnvelope($domdoc)
  {
@@ -56,9 +59,9 @@ public function Products()
      $rss->setAttribute('version','2.0');
      $channel = $rss->appendChild($domdoc->createElement('channel'));
 
-     $title = $domdoc->createElement('title','Example - Online Store');
-     $link = $domdoc->createElement('link','http://www.example.com');
-     $description = $domdoc->createElement('description','This is a sample feed containing the required and recommended attributes for a variety of different products');
+     $title = $domdoc->createElement('title',$this->storeName);
+     $link = $domdoc->createElement('link',$this->link);
+     $description = $domdoc->createElement('description',$this->description);
      $channel->appendChild($title);
      $channel->appendChild($link);
      $channel->appendChild($description);
@@ -73,7 +76,7 @@ private function validate($items)
 
    $productCount = count($items);
     foreach($items as $item){
-       $errors = $item->validate;
+       $errors = $item->validate();
     }
 
     if(count($errors) > 0 )
