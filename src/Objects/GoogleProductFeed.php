@@ -57,7 +57,8 @@ public function Products()
      $rss = $domdoc->appendChild($envelope);
      $rss->setAttribute('xmlns:g','http://base.google.com/ns/1.0');
      $rss->setAttribute('version','2.0');
-     $channel = $rss->appendChild($domdoc->createElement('channel'));
+     $channel =  $domdoc->createElement('channel')
+     $rss->appendChild($channel);
 
      $title = $domdoc->createElement('title',$this->storeName);
      $link = $domdoc->createElement('link',$this->link);
