@@ -7,9 +7,9 @@ use RapidWeb\GoogleProductFeedXml\Objects\BaseProduct;
 class GoogleProductFeed
 {
  private  $products = [];
- private $storeName;
- private $description;
- private $link;
+ public   $storeName;
+ public   $description;
+ public   $link;
 
  public function addProduct(BaseProduct $product)
  {
