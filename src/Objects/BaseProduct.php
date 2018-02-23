@@ -3,6 +3,7 @@ namespace RapidWeb\GoogleProductFeedXml\Objects;
 
 
 use RapidWeb\GoogleProductFeedXml\Interfaces\ProductInterface;
+use RapidWeb\GoogleProductFeedXml\Interfaces\ShippingMethod;
 use DOMDocument;
 
 
@@ -18,6 +19,10 @@ class BaseProduct implements ProductInterface
   public $price;
   public $groupid;
   public $variations = [];
+  public $gtin;
+  public $mpn;
+  public $currencyCode;
+  public $shippingMethod;
 
   public function createXmlelement($domdoc)
   {
@@ -30,7 +35,9 @@ class BaseProduct implements ProductInterface
     $image = $domdoc->createElement('g:image_link',$this->image);
     $condition = $domdoc->createElement('g:condition',$this->condition);
     $availability = $domdoc->createElement('g:availability',$this->availability);
-    $price =  $domdoc->createElement('g:price',$this->price);
+    $price =  $domdoc->createElement('g:price',$this->price." ".$this->currencyCode);
+    $gtin =  $domdoc->createElement('g:gtin',$this->gtin);
+    $mpn =  $domdoc->createElement('g:mpn',$this->mpn);
     
     if(isset($this->groupid)){
       $groupid =  $domdoc->createElement('g:item_group_id',$this->groupid);
@@ -50,6 +57,9 @@ class BaseProduct implements ProductInterface
     $item->appendChild($condition);
     $item->appendChild($availability);
     $item->appendChild($price);
+    $item->appendChild($gtin);
+    $item->appendChild($mpn);
+    $item->appendChild($shippingMethod);
 
     return $item;
   }
@@ -58,6 +68,11 @@ class BaseProduct implements ProductInterface
   {
     $product->groupid = $this->sku;
     $this->variations[] = $product; 
+  }
+
+  public function addShippingMethod(ShippingMethod $shippingMethod)
+  {
+   $this->shippingMethod = $shippingMethod;
   }
 
   public function validate()
@@ -94,6 +109,14 @@ class BaseProduct implements ProductInterface
     if(!isset($this->price))
     {
         $errors[] = "is missing a price";
+    }
+    if(!isset($gtin))
+    {
+        $errors[] = "is missing a GTIN identifier";  
+    }
+    if(!isset($currencyCode))
+    {
+        $errors[] = "is missing a currency code";  
     }
 
     return $errors;

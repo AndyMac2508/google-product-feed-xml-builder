@@ -5,11 +5,11 @@ require_once 'vendor/autoload.php';
 use RapidWeb\GoogleProductFeedXml\Objects\ApparelProduct;
 use RapidWeb\GoogleProductFeedXml\Objects\GoogleProductFeed;
 use RapidWeb\GoogleProductFeedXml\Objects\Variation;
+use RapidWeb\GoogleProductFeedXml\Objects\ShippingMethod;
 
+//$productVariation = new ApparelProduct;
+//$productVariation2 = new ApparelProduct;
 $product = new ApparelProduct;
-$productVariation = new ApparelProduct;
-$productVariation2 = new ApparelProduct;
-
 
 $product->sku = "sku123";
 $product->name = "testname";
@@ -27,8 +27,21 @@ $product->ageGroup = "agegroup";
 $product->color = "Red";
 $product->size = "small ";
 
+$product->gtin = "gtin";
+$product->mpn = "mpn";
+$product->currencyCode = "GBP";
+
+        $shipping = new ShippingMethod;
+
+        $shipping->country = "UK";
+        $shipping->serviceType = "Standard";
+        $shipping->price = "14.95";
+
+$product->addShippingMethod($shipping);
 
 
+
+/*
 $productVariation->sku = "variation";
 $productVariation->description = "variationdesc";
 $productVariation->url =  "variationurl";
@@ -62,7 +75,7 @@ $productVariation2->size = "variationsize2";
 
 $product->addVariation($productVariation);
 $product->addVariation($productVariation2);
-
+*/
 
 
 
