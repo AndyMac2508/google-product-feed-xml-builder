@@ -61,10 +61,7 @@ class ApparelProduct extends BaseProduct implements ProductInterface
       {
           $errors[] = "is missing a color";
       }
-      if(!isset($this->size))
-      {
-          $errors[] = "is missing a size";
-      }
+ 
 
       return $errors;
       

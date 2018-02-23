@@ -38,7 +38,7 @@ abstract class GoogleProductFeed
     }
  
 
-    var_dump($domdoc->saveXML()); die;
+    return $domdoc->saveXML();
 
 
     
@@ -82,8 +82,4 @@ private function validate($items)
     }
     return false;
 }
-
 }
-
-
-?>
