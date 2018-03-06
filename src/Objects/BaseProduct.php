@@ -29,8 +29,8 @@ class BaseProduct implements ProductInterface
     $item = $domdoc->createElement('item');
 
     $id = $domdoc->createElement('g:id',$this->sku);
-    $title = $domdoc->createElement('g:title',$this->name);
-    $description = $domdoc->createElement('g:description',$this->description);
+    $title = $domdoc->createElement('g:title',htmlspecialchars($this->name));
+    $description = $domdoc->createElement('g:description',htmlspecialchars($this->description));
     $link = $domdoc->createElement('g:link',$this->url);
     $image = $domdoc->createElement('g:image_link',$this->image);
     $condition = $domdoc->createElement('g:condition',$this->condition);
