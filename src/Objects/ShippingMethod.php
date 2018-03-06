@@ -16,7 +16,7 @@ class ShippingMethod implements ShippingInterface
   {
     $shipping = $domdoc->createElement('g:shipping');
 
-    $shippingCountry = $domdoc->createElement('g:country',$this->sku);
+    $shippingCountry = $domdoc->createElement('g:country',$this->country);
     $serviceType = $domdoc->createElement('g:service',$this->serviceType);
     $price = $domdoc->createElement('g:price',$this->price);
 

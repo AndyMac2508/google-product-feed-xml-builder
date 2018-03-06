@@ -22,7 +22,7 @@ class GoogleProductFeed
     if($errors = $this->validate($this->products)){
         return $errors;
     }
-
+  
 
     $domdoc = new DOMDocument('1.0');
 
@@ -40,7 +40,7 @@ class GoogleProductFeed
       }
     }
  
-
+   
     return $domdoc->saveXML();
 
 
@@ -57,7 +57,7 @@ public function Products()
      $rss = $domdoc->appendChild($envelope);
      $rss->setAttribute('xmlns:g','http://base.google.com/ns/1.0');
      $rss->setAttribute('version','2.0');
-     $channel =  $domdoc->createElement('channel')
+     $channel =  $domdoc->createElement('channel');
      $rss->appendChild($channel);
 
      $title = $domdoc->createElement('title',$this->storeName);
@@ -73,10 +73,10 @@ public function Products()
 private function validate($items)
 {
     //validation
-   $i = 0;
+   $i = 0; 
 
    $productCount = count($items);
-    foreach($items as $item){
+    foreach($items as $item){ 
        $errors = $item->validate();
     }
 

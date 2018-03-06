@@ -10,15 +10,19 @@ use RapidWeb\GoogleProductFeedXml\Objects\ShippingMethod;
 //$productVariation = new ApparelProduct;
 //$productVariation2 = new ApparelProduct;
 $product = new ApparelProduct;
+$GoogleProductFeed = new GoogleProductFeed;
 
 $product->sku = "sku123";
 $product->name = "testname";
 $product->description = "description";
 $product->url =  "testurl";
+$product->gtin = 'testgtin';
 
 $product->condition =  "new";
 $product->availability = "instock";
 $product->price = "22.99";
+$product->currencyCode = 'GBP';
+$product->image = 'test image';
 
 $product->googleProductCategory = "category";
 $product->brand = "brand";
@@ -79,16 +83,18 @@ $product->addVariation($productVariation2);
 
 
 
-GoogleProductFeed::addProduct($product);
+$GoogleProductFeed->addProduct($product);
 
 
 
 
-$status = GoogleProductFeed::getXml();
-
-foreach($status as $stat)
-{
-    echo "<p>".$stat."</p>";
+$status = $GoogleProductFeed->getXml();
+if(isset($status)){
+    foreach($status as $stat)
+    {
+        echo "<p>".$stat."</p>";
+    }
+    
 }
 
 

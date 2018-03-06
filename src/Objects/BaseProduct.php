@@ -3,7 +3,7 @@ namespace RapidWeb\GoogleProductFeedXml\Objects;
 
 
 use RapidWeb\GoogleProductFeedXml\Interfaces\ProductInterface;
-use RapidWeb\GoogleProductFeedXml\Interfaces\ShippingMethod;
+use RapidWeb\GoogleProductFeedXml\Objects\ShippingMethod;
 use DOMDocument;
 
 
@@ -48,6 +48,8 @@ class BaseProduct implements ProductInterface
       $groupid =  $domdoc->createElement('g:item_group_id',$this->sku);
       $item->appendChild($groupid);
     }
+
+    $shippingMethod = $this->shippingMethod->createXmlelement($domdoc);
 
     $item->appendChild($id);
     $item->appendChild($title);
@@ -110,13 +112,17 @@ class BaseProduct implements ProductInterface
     {
         $errors[] = "is missing a price";
     }
-    if(!isset($gtin))
-    {
+    if(!isset($this->gtin))
+    { 
         $errors[] = "is missing a GTIN identifier";  
     }
-    if(!isset($currencyCode))
+    if(!isset($this->currencyCode))
     {
         $errors[] = "is missing a currency code";  
+    }
+    if(!isset($this->shippingMethod))
+    {
+        $errors[] = "No Shipping method has been set for this product";  
     }
 
     return $errors;
