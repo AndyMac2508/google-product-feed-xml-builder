@@ -11,6 +11,7 @@ class ShippingMethod implements ShippingInterface
   public $country;
   public $serviceType;
   public $price;
+  public $currencyCode;
 
   public function createXmlelement($domdoc)
   {
@@ -18,7 +19,7 @@ class ShippingMethod implements ShippingInterface
 
     $shippingCountry = $domdoc->createElement('g:country',$this->country);
     $serviceType = $domdoc->createElement('g:service',$this->serviceType);
-    $price = $domdoc->createElement('g:price',$this->price);
+    $price = $domdoc->createElement('g:price',$this->price." ".$this->currencyCode );
 
     $shipping->appendChild($shippingCountry);
     $shipping->appendChild($serviceType);
