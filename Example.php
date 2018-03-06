@@ -88,14 +88,8 @@ $GoogleProductFeed->addProduct($product);
 
 
 
-$status = $GoogleProductFeed->getXml();
-if(isset($status)){
-    foreach($status as $stat)
-    {
-        echo "<p>".$stat."</p>";
-    }
-    
-}
+$GoogleProductFeed->exportToXml('test');
+
 
 
 

@@ -29,13 +29,13 @@ class GoogleProductFeed
     $domdoc->preserveWhiteSpace = false;
     $domdoc->formatOutput = true;
 
-    $envelope = $domdoc->appendChild($this->feedEnvelope($domdoc));
+    $channel = $this->feedEnvelope($domdoc);
 
     foreach($this->products as $product){
-      $envelope->appendChild($product->createXmlelement($domdoc));
+      $channel->appendChild($product->createXmlelement($domdoc));
       if(count($product->variations) > 0){
           foreach($product->variations as $variation){
-            $envelope->appendChild($variation->createXmlelement($domdoc));
+            $channel->appendChild($variation->createXmlelement($domdoc));
           }
       }
     }
@@ -53,10 +53,12 @@ public function Products()
  }
  private function feedEnvelope($domdoc)
  {
-     $envelope = $domdoc->createElement('rss');
-     $rss = $domdoc->appendChild($envelope);
+     $rss = $domdoc->createElement('rss');
+     $domdoc->appendChild($rss);
+
      $rss->setAttribute('xmlns:g','http://base.google.com/ns/1.0');
      $rss->setAttribute('version','2.0');
+     
      $channel =  $domdoc->createElement('channel');
      $rss->appendChild($channel);
 
@@ -86,4 +88,15 @@ private function validate($items)
     }
     return false;
 }
+
+    public function exportToXml($fileName)
+    {
+     $fileHandle = fopen($fileName.".xml", "w");
+        
+            fwrite($fileHandle, $this->getXml());
+        
+            fclose($fileHandle);
+        
+    } 
+    
 }
